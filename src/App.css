@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+  
+}
+
+.navbar{
+  background-color: aqua;
+  /* position: fixed; */
+  height: 80px;
+ 
+  
+}
+.navbar h1{
+  margin: 0px;
+}
+.countries{
+  margin-top: 70px;
+   display: grid;
+   grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
+   grid-gap: 20px;
+   padding: 10px;
+}
+.country{
+  background-color: aqua;
+  border: 3px solid #000;
+  border-radius: 20px;
+  margin-right:100px;
+}
+.country img{ 
+    width: 315px;
+    height: 190px;
+    border-radius: 15px 15px 0px 0px;
+}
+.countries :not(.image){
+  text-align: left;
+  margin-left:20px;
+  text-decoration-style: none;
+}
+.country h1{
+  font-size: 20px;
+}
+a{
+  text-decoration: none;
+}
