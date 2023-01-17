@@ -1,5 +1,5 @@
 import axios from "axios";
-
+// import SearchIcon from '@mui/icons-material/Search';
 import React from "react";
 export default class Home extends React.Component {
   constructor() {
@@ -41,16 +41,50 @@ export default class Home extends React.Component {
     }
 
   }
+  SearchRegion(value) {
+    console.log(value);
+    if (value !== "Filter") {
+      axios.get(`https://restcountries.com/v3.1/region/${value}`)
+        .then((response) => {
+          console.log(response);
+          this.setState({
+            data: [...response.data]
+          })
+        })
+        .catch((error) => { console.log(error) })
+
+    } else {
+      axios.get('https://restcountries.com/v3.1/all')
+        .then((response) => {
+          // console.log(response);
+          this.setState({
+            data: [...response.data]
+          })
+        })
+        .catch((error) => { console.log(error) })
+    }
+  }
 
 
   render() {
     return (
       <div className="search">
-        <input type="text" name="country" onChange={
-          ((event) => { this.SearchCountry(event.target.value) })
-        } />
+        <div className="search-container">
+          <input type="search" name="country" onChange={
+            ((event) => { this.SearchCountry(event.target.value) })
+          } placeholder="Search for a country" />
+          <select name="Region" id="Region" onChange={(event) => { this.SearchRegion(event.target.value) }}>
+            <option value="Filter">Filter By Region</option>
+            <option value="Africa">Africa</option>
+            <option value="Americas">Americas</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+            <option value="Antarctic">Antarctic</option>
+          </select>
+        </div>
         <div className="countries">
-          {this.state.data.map((counrty,index) => {
+          {this.state.data.map((counrty, index) => {
             // console.log(counrty);
             return (
               <a key={index} href={`/country/${counrty.name.common}`}>
